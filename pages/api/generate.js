@@ -23,7 +23,6 @@ const generateAction = async (req, res) => {
       {
         headers: {
           Authorization: `Bearer ${process.env.HF_AUTH_KEY}`,
-          //Authorization: `Bearer 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`,
           "Content-Type": "application/json", 
         },
         method: 'POST',
