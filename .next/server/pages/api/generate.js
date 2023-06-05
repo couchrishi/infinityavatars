@@ -1,25 +1,61 @@
 "use strict";
-/*
- * ATTENTION: An "eval-source-map" devtool has been used.
- * This devtool is neither made for production nor for readable output files.
- * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
- * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
- * or disable the default devtool with "devtool: false".
- * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
- */
 (() => {
 var exports = {};
-exports.id = "pages/api/generate";
-exports.ids = ["pages/api/generate"];
+exports.id = 565;
+exports.ids = [565];
 exports.modules = {
 
-/***/ "(api)/./pages/api/generate.js":
-/*!*******************************!*\
-  !*** ./pages/api/generate.js ***!
-  \*******************************/
+/***/ 551:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n// const generateAction = async (req, res) => {\n//   console.log('Received request')\n// }\n// export default generateAction;\nconst bufferToBase64 = (buffer)=>{\n    let arr = new Uint8Array(buffer);\n    const base64 = btoa(arr.reduce((data, byte)=>data + String.fromCharCode(byte), \"\"));\n    return `data:image/png;base64,${base64}`;\n};\nconst generateAction = async (req, res)=>{\n    console.log(\"Received request\");\n    const input = JSON.parse(req.body).finalInput;\n    const response = await fetch(`https://api-inference.huggingface.co/models/couchrishi/saibalajifaces`, {\n        headers: {\n            //Authorization: `Bearer ${process.env.HF_AUTH_KEY}`,\n            Authorization: `Bearer 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`,\n            \"Content-Type\": \"application/json\"\n        },\n        method: \"POST\",\n        body: JSON.stringify({\n            inputs: input\n        })\n    });\n    // Check for different statuses to send proper payload\n    if (response.ok) {\n        const buffer = await response.arrayBuffer();\n        // Convert to base64\n        const base64 = bufferToBase64(buffer);\n        // Make sure to change to base64\n        res.status(200).json({\n            image: base64\n        });\n    } else if (response.status === 503) {\n        const json = await response.json();\n        res.status(503).json(json);\n    } else {\n        const json1 = await response.json();\n        res.status(response.status).json({\n            error: response.statusText\n        });\n    }\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (generateAction);\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKGFwaSkvLi9wYWdlcy9hcGkvZ2VuZXJhdGUuanMuanMiLCJtYXBwaW5ncyI6Ijs7OztBQUFBLCtDQUErQztBQUMvQyxvQ0FBb0M7QUFDcEMsSUFBSTtBQUVKLGlDQUFpQztBQUVqQyxNQUFNQSxpQkFBaUIsQ0FBQ0MsU0FBVztJQUNqQyxJQUFJQyxNQUFNLElBQUlDLFdBQVdGO0lBQ3pCLE1BQU1HLFNBQVNDLEtBQ2JILElBQUlJLE1BQU0sQ0FBQyxDQUFDQyxNQUFNQyxPQUFTRCxPQUFPRSxPQUFPQyxZQUFZLENBQUNGLE9BQU87SUFFL0QsT0FBTyxDQUFDLHNCQUFzQixFQUFFSixPQUFPLENBQUM7QUFDMUM7QUFJQSxNQUFNTyxpQkFBaUIsT0FBT0MsS0FBS0MsTUFBUTtJQUN2Q0MsUUFBUUMsR0FBRyxDQUFDO0lBQ1osTUFBTUMsUUFBUUMsS0FBS0MsS0FBSyxDQUFDTixJQUFJTyxJQUFJLEVBQUVDLFVBQVU7SUFFN0MsTUFBTUMsV0FBVyxNQUFNQyxNQUNyQixDQUFDLHFFQUFxRSxDQUFDLEVBQ3ZFO1FBQ0VDLFNBQVM7WUFDUCxxREFBcUQ7WUFDckRDLGVBQWUsQ0FBQyw0Q0FBNEMsQ0FBQztZQUM3RCxnQkFBZ0I7UUFDbEI7UUFDQUMsUUFBUTtRQUNSTixNQUFNRixLQUFLUyxTQUFTLENBQUM7WUFDbkJDLFFBQVFYO1FBQ1Y7SUFDRjtJQUdGLHNEQUFzRDtJQUN0RCxJQUFJSyxTQUFTTyxFQUFFLEVBQUU7UUFDZixNQUFNM0IsU0FBUyxNQUFNb0IsU0FBU1EsV0FBVztRQUN6QyxvQkFBb0I7UUFDcEIsTUFBTXpCLFNBQVNKLGVBQWVDO1FBQzlCLGdDQUFnQztRQUNoQ1ksSUFBSWlCLE1BQU0sQ0FBQyxLQUFLQyxJQUFJLENBQUM7WUFBRUMsT0FBTzVCO1FBQU87SUFFdkMsT0FBTyxJQUFJaUIsU0FBU1MsTUFBTSxLQUFLLEtBQUs7UUFDbEMsTUFBTUMsT0FBTyxNQUFNVixTQUFTVSxJQUFJO1FBQ2hDbEIsSUFBSWlCLE1BQU0sQ0FBQyxLQUFLQyxJQUFJLENBQUNBO0lBQ3ZCLE9BQU87UUFDTCxNQUFNQSxRQUFPLE1BQU1WLFNBQVNVLElBQUk7UUFDaENsQixJQUFJaUIsTUFBTSxDQUFDVCxTQUFTUyxNQUFNLEVBQUVDLElBQUksQ0FBQztZQUFFRSxPQUFPWixTQUFTYSxVQUFVO1FBQUM7SUFDaEUsQ0FBQztBQUNIO0FBRUEsaUVBQWV2QixjQUFjQSxFQUFDIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vYWktYXZhdGFyLWdlbmVyYXRvci8uL3BhZ2VzL2FwaS9nZW5lcmF0ZS5qcz82MjdjIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIGNvbnN0IGdlbmVyYXRlQWN0aW9uID0gYXN5bmMgKHJlcSwgcmVzKSA9PiB7XG4vLyAgIGNvbnNvbGUubG9nKCdSZWNlaXZlZCByZXF1ZXN0Jylcbi8vIH1cblxuLy8gZXhwb3J0IGRlZmF1bHQgZ2VuZXJhdGVBY3Rpb247XG5cbmNvbnN0IGJ1ZmZlclRvQmFzZTY0ID0gKGJ1ZmZlcikgPT4ge1xuICBsZXQgYXJyID0gbmV3IFVpbnQ4QXJyYXkoYnVmZmVyKTtcbiAgY29uc3QgYmFzZTY0ID0gYnRvYShcbiAgICBhcnIucmVkdWNlKChkYXRhLCBieXRlKSA9PiBkYXRhICsgU3RyaW5nLmZyb21DaGFyQ29kZShieXRlKSwgXCJcIilcbiAgKTtcbiAgcmV0dXJuIGBkYXRhOmltYWdlL3BuZztiYXNlNjQsJHtiYXNlNjR9YDtcbn07XG5cblxuXG5jb25zdCBnZW5lcmF0ZUFjdGlvbiA9IGFzeW5jIChyZXEsIHJlcykgPT4ge1xuICAgIGNvbnNvbGUubG9nKCdSZWNlaXZlZCByZXF1ZXN0Jyk7XG4gICAgY29uc3QgaW5wdXQgPSBKU09OLnBhcnNlKHJlcS5ib2R5KS5maW5hbElucHV0O1xuICBcbiAgICBjb25zdCByZXNwb25zZSA9IGF3YWl0IGZldGNoKFxuICAgICAgYGh0dHBzOi8vYXBpLWluZmVyZW5jZS5odWdnaW5nZmFjZS5jby9tb2RlbHMvY291Y2hyaXNoaS9zYWliYWxhamlmYWNlc2AsXG4gICAgICB7XG4gICAgICAgIGhlYWRlcnM6IHtcbiAgICAgICAgICAvL0F1dGhvcml6YXRpb246IGBCZWFyZXIgJHtwcm9jZXNzLmVudi5IRl9BVVRIX0tFWX1gLFxuICAgICAgICAgIEF1dGhvcml6YXRpb246IGBCZWFyZXIgaGZfTWtRR0RpbU9UYVR1eWpqY2pMYmNQaktLbERlR0h3VU9XV2AsXG4gICAgICAgICAgXCJDb250ZW50LVR5cGVcIjogXCJhcHBsaWNhdGlvbi9qc29uXCIsIFxuICAgICAgICB9LFxuICAgICAgICBtZXRob2Q6ICdQT1NUJyxcbiAgICAgICAgYm9keTogSlNPTi5zdHJpbmdpZnkoe1xuICAgICAgICAgIGlucHV0czogaW5wdXQsXG4gICAgICAgIH0pLFxuICAgICAgfVxuICAgICk7XG5cbiAgICAvLyBDaGVjayBmb3IgZGlmZmVyZW50IHN0YXR1c2VzIHRvIHNlbmQgcHJvcGVyIHBheWxvYWRcbiAgICBpZiAocmVzcG9uc2Uub2spIHtcbiAgICAgIGNvbnN0IGJ1ZmZlciA9IGF3YWl0IHJlc3BvbnNlLmFycmF5QnVmZmVyKCk7XG4gICAgICAvLyBDb252ZXJ0IHRvIGJhc2U2NFxuICAgICAgY29uc3QgYmFzZTY0ID0gYnVmZmVyVG9CYXNlNjQoYnVmZmVyKTtcbiAgICAgIC8vIE1ha2Ugc3VyZSB0byBjaGFuZ2UgdG8gYmFzZTY0XG4gICAgICByZXMuc3RhdHVzKDIwMCkuanNvbih7IGltYWdlOiBiYXNlNjQgfSk7XG5cbiAgICB9IGVsc2UgaWYgKHJlc3BvbnNlLnN0YXR1cyA9PT0gNTAzKSB7XG4gICAgICBjb25zdCBqc29uID0gYXdhaXQgcmVzcG9uc2UuanNvbigpO1xuICAgICAgcmVzLnN0YXR1cyg1MDMpLmpzb24oanNvbik7XG4gICAgfSBlbHNlIHtcbiAgICAgIGNvbnN0IGpzb24gPSBhd2FpdCByZXNwb25zZS5qc29uKCk7XG4gICAgICByZXMuc3RhdHVzKHJlc3BvbnNlLnN0YXR1cykuanNvbih7IGVycm9yOiByZXNwb25zZS5zdGF0dXNUZXh0IH0pO1xuICAgIH1cbiAgfTtcbiAgXG4gIGV4cG9ydCBkZWZhdWx0IGdlbmVyYXRlQWN0aW9uOyJdLCJuYW1lcyI6WyJidWZmZXJUb0Jhc2U2NCIsImJ1ZmZlciIsImFyciIsIlVpbnQ4QXJyYXkiLCJiYXNlNjQiLCJidG9hIiwicmVkdWNlIiwiZGF0YSIsImJ5dGUiLCJTdHJpbmciLCJmcm9tQ2hhckNvZGUiLCJnZW5lcmF0ZUFjdGlvbiIsInJlcSIsInJlcyIsImNvbnNvbGUiLCJsb2ciLCJpbnB1dCIsIkpTT04iLCJwYXJzZSIsImJvZHkiLCJmaW5hbElucHV0IiwicmVzcG9uc2UiLCJmZXRjaCIsImhlYWRlcnMiLCJBdXRob3JpemF0aW9uIiwibWV0aG9kIiwic3RyaW5naWZ5IiwiaW5wdXRzIiwib2siLCJhcnJheUJ1ZmZlciIsInN0YXR1cyIsImpzb24iLCJpbWFnZSIsImVycm9yIiwic3RhdHVzVGV4dCJdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///(api)/./pages/api/generate.js\n");
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+// const generateAction = async (req, res) => {
+//   console.log('Received request')
+// }
+// export default generateAction;
+const bufferToBase64 = (buffer)=>{
+    let arr = new Uint8Array(buffer);
+    const base64 = btoa(arr.reduce((data, byte)=>data + String.fromCharCode(byte), ""));
+    return `data:image/png;base64,${base64}`;
+};
+const generateAction = async (req, res)=>{
+    console.log("Received request");
+    const input = JSON.parse(req.body).finalInput;
+    const response = await fetch(`https://api-inference.huggingface.co/models/couchrishi/saibalajifaces`, {
+        headers: {
+            Authorization: `Bearer ${process.env.HF_AUTH_KEY}`,
+            //Authorization: `Bearer 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`,
+            "Content-Type": "application/json"
+        },
+        method: "POST",
+        body: JSON.stringify({
+            inputs: input
+        })
+    });
+    // Check for different statuses to send proper payload
+    if (response.ok) {
+        const buffer = await response.arrayBuffer();
+        // Convert to base64
+        const base64 = bufferToBase64(buffer);
+        // Make sure to change to base64
+        res.status(200).json({
+            image: base64
+        });
+    } else if (response.status === 503) {
+        const json = await response.json();
+        res.status(503).json(json);
+    } else {
+        const json = await response.json();
+        res.status(response.status).json({
+            error: response.statusText
+        });
+    }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (generateAction);
+
 
 /***/ })
 
@@ -30,7 +66,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 var __webpack_require__ = require("../../webpack-api-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = (__webpack_exec__("(api)/./pages/api/generate.js"));
+var __webpack_exports__ = (__webpack_exec__(551));
 module.exports = __webpack_exports__;
 
 })();
