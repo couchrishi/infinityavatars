@@ -147,7 +147,7 @@ const sleep = (ms) => {
       </div>
 
       <div className="badge-container grow">
-        <a
+        {/* <a
           href="https://buildspace.so/builds/ai-avatar"
           target="_blank"
           rel="noreferrer"
@@ -156,7 +156,7 @@ const sleep = (ms) => {
             <Image src={buildspaceLogo} alt="buildspace logo" />
             <p>build with buildspace</p>
           </div>
-        </a>
+        </a> */}
       </div>
     </div>
   );
